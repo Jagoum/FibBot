@@ -10,7 +10,7 @@ jobs:
         steps:
             # This will Check my repository to see if it is running
             -   name: Checkout Repository
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
             
             -   name: Exercute Custorm Action
                 uses: ./
