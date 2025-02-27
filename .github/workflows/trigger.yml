@@ -43,6 +43,11 @@ jobs:
                 with:
                     enable_fib: ""
                     max_threshold: ""
+            -   name: Run with 150 and enable status true
+                uses: ./
+                with:
+                    enable_fib: "true"
+                    max_threshold: "150"
                     
             
 
