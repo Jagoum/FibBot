@@ -1,7 +1,21 @@
 name: Print hello world
 description: "This action is to print hello world"
 
+inputs:
+  enable_fib:
+    description: "This will enable fibonacci"
+    required: true
+    default: "true"
+
+  max_threshold:
+    description: "This is the max value of the fibonacci"
+    required: true
+    default: "100"
+
+
 runs:
     using: "docker"
     image: "Dockerfile"
-    
+    args:
+      - ${{ inputs.enable_fib }}
+      - ${{ inputs.max_threshold }}

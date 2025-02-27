@@ -3,6 +3,7 @@ on:
     push:
         branches:
             - main
+            - '**'
 
 jobs:
     run-hello-world:
@@ -29,6 +30,20 @@ jobs:
                 uses: ./
                 with:
                     runs: "composite"
+                    
+                    #This will be used to run my action with the precised values
+            -   name: Run my action with arguments [20, false]
+                uses: ./
+                with:
+                    enable_fib: "false"
+                    max_threshold: "20"
+
+            -   name: Run My action with these other arguments [_,true]
+                uses: ./
+                with:
+                    enable_fib: ""
+                    max_threshold: ""
+                    
             
 
 
