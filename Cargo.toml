@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 gh-workflow = "0.5.10"
+regex = "1.11.1"
