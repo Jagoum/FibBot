@@ -11,12 +11,7 @@ jobs:
             # This will Check my repository to see if it is running
             -   name: Checkout Repository
                 uses: actions/checkout@v4
-            
-            -   name: Exercute Custorm Action
-                uses: ./
-                with:
-                    runs: "composite"
-            
+                
             -   name: Cached Cargo registry and build
                 uses: actions/cache@v4
                 with:
@@ -29,6 +24,13 @@ jobs:
                     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-cargo-
+                        
+            -   name: Exercute Custorm Action
+                uses: ./
+                with:
+                    runs: "composite"
+            
+
 
 
         
