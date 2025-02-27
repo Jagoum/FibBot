@@ -1,21 +1,6 @@
-name: Triggers my action 
-on: push
-jobs:
-    build:
-        runs-on: ubuntu-latest
-        runs: 
-          using: "composite"
-          steps:
-            # this one checks if everything is working correctly in your repo
-          -   name: checkout  repository
-              uses: actions/checkout@v3 
+name: Print hello world
+description: "This action is to print hello world"
 
-          -   name: Set up docker buildx
-              uses: docker/setup-buildx-action@v2
-
-          -   name: Build Docker image
-              uses: docker/build-push-action@v4
-              with:
-                context: .
-                file: ./Dockerfile
-                push: false
+using: "docker"
+image: "Dockerfile"
+    
