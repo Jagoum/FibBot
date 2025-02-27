@@ -10,6 +10,6 @@ FROM debian:bookworm-slim
 
 WORKDIR /app
 
-COPY --from=builder /target/release/fibbot /app/fibbot
+COPY --from=builder /target/release/fibbot /usr/local/bin/fibbot
 
-CMD [ "./fibbot" ]
+ENTRYPOINT [ "/usr/local/bin/fibbot" ]
