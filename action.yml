@@ -1,6 +1,7 @@
 name: Print hello world
 description: "This action is to print hello world"
 
-using: "docker"
-image: "Dockerfile"
+runs:
+    using: "docker"
+    image: "Dockerfile"
     
