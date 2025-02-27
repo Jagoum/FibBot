@@ -1,8 +1,19 @@
-name: Print Hello world
+name: Triggers my action 
 on: push
 jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print hello world
-      run: echo "Hello World!"
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # this one checks if everything is working correctly in your repo
+        -   name: checkout  repository
+            uses: actions/checkout@v3 
+
+        -   name: Set up docker buildx
+            uses: docker/setup-buildx-action@v2
+
+        -   name: Build Docker image
+            uses: docker/build-push-action@v4
+            with:
+                context: .
+                file: ./Dockerfile
+                push: false
