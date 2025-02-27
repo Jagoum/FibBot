@@ -14,7 +14,13 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
             elements.push(fibn);
 
         }
+        elements
     }
-    elements
-
+    else if num == 1{
+        return elements;
+    }
+    else {
+        return vec![0];
+    }
+ 
 }
