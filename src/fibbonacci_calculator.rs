@@ -1,4 +1,4 @@
-pub fn fibonacci(num: u128) -> Vec<u128>{
+pub fn fibonacci(num: i128) -> Vec<u128>{
     let mut elements:Vec<u128> = vec![0,1];
     
     let mut fib1 = 0;
@@ -14,13 +14,29 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
             elements.push(fibn);
 
         }
+        for i in elements.clone(){
+            print!("{}, ",i);
+        }
+        println!();
         elements
     }
     else if num == 1{
         return elements;
     }
     else {
-        return vec![0];
+        return vec![];
     }
  
+}
+#[test]
+fn works_correctly(){
+    let fib = fibonacci(4);
+    assert_eq!(*fib.get(3).unwrap(), 2);
+    assert_eq!(*fib.get(0).unwrap(), 0);
+    assert_eq!(*fib.get(1).unwrap(),1);
+}
+fn it_might_work(){
+    let might_work = fibonacci(0);
+    assert_eq!(*might_work.get(0).unwrap(),0);
+   unsafe { assert_eq!(*might_work.get(9).unwrap(),0)};
 }

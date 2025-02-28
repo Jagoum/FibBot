@@ -1,8 +1,6 @@
 mod extract_numbers;
 mod fibbonacci_calculator;
 use std::env;
-
-use extract_numbers::extract_nums;
 use fibbonacci_calculator::fibonacci;
 
 fn main() {
@@ -23,9 +21,10 @@ fn main() {
 
     if enable_fib && users_input <= max_threshold {
         println!("Printing fibonaci Series up to {users_input}th index");
-        for (_, element) in fibonacci(users_input).iter().enumerate(){
+        for (_, element) in fibonacci(users_input.try_into().unwrap()).iter().enumerate(){
             print!("{} ",element);
         }
     }
+    println!();
 }
 

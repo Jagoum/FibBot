@@ -16,7 +16,7 @@ inputs:
     description: "The user should parse his own value but it should not be greater than the max_threshold"
     required: true
     default: "0"
-
+  runs:
     using: "docker"
     image: "Dockerfile"
     args:
