@@ -37,6 +37,7 @@ jobs:
                 with:
                     enable_fib: "false"
                     max_threshold: "20"
+                    users_input: "10"
                     
 
             -   name: Run My action with these other arguments [_,true]
@@ -44,6 +45,7 @@ jobs:
                 with:
                     enable_fib: "true"
                     max_threshold: "158"
+                    users_input: "25"
                    
 
             -   name: Run with 150 and enable status true
@@ -51,6 +53,7 @@ jobs:
                 with:
                     enable_fib: "true"
                     max_threshold: "150"
+                    users_input: "28"
                    
                     
             

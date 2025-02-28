@@ -9,8 +9,12 @@ inputs:
 
   max_threshold:
     description: "This is the max value of the fibonacci"
-    required: false
+    required: true
     default: "180"
+  users_input:
+    description: "User manually enters the input and it should not be greater than the max_threshold"
+    required: false
+    default: "0"
 
 runs:
   using: "docker"
