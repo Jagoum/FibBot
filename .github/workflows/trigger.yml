@@ -1,0 +1,64 @@
+name: Print Hello World
+on:
+    push:
+        branches:
+            - main
+            - '**'
+
+jobs:
+    run-hello-world:
+        runs-on: ubuntu-latest
+        steps:
+            # This will Check my repository to see if it is running
+            -   name: Checkout Repository
+                uses: actions/checkout@v4
+                
+            -   name: Cached Cargo registry and build
+                uses: actions/cache@v4
+                with:
+                    path: |
+                        ~.cargo/bin/
+                        ~/.cargo/registry/index/
+                        ~/.cargo/registry/cache/
+                        ~.cargo/.git/db/
+                        target
+                    key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-cargo-
+                        
+            -   name: Exercute Custorm Action
+                uses: ./
+                with:
+                    runs: "composite"
+                    
+                    #This will be used to run my action with the precised values
+            -   name: Run my action with arguments [20, false]
+                uses: ./
+                with:
+                    enable_fib: "false"
+                    max_threshold: "20"
+                    users_input: "10"
+                    
+
+            -   name: Run My action with these other arguments [_,true]
+                uses: ./
+                with:
+                    enable_fib: "true"
+                    max_threshold: "158"
+                    users_input: "25"
+                   
+
+            -   name: Run with 150 and enable status true
+                uses: ./
+                with:
+                    enable_fib: "true"
+                    users_input: "28"
+                    max_threshold: "150"
+                   
+                    
+            
+
+
+
+        
+        

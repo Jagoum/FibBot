@@ -1,8 +1,24 @@
-name: Print Hello world
-on: push
-jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print hello world
-      run: echo "Hello World!"
+name: Print hello world
+description: "This action is to print hello world"
+
+inputs:
+  enable_fib:
+    description: "This will enable fibonacci"
+    required: false
+    default: "true"
+
+  max_threshold:
+    description: "This is the max value of the fibonacci"
+    required: true
+    default: "180"
+  users_input:
+    description: "User manually enters the input and it should not be greater than the max_threshold"
+    required: false
+    default: "0"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.enable_fib }}
+    - ${{ inputs.max_threshold }}
