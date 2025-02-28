@@ -6,15 +6,16 @@ inputs:
     description: "This will enable fibonacci"
     required: false
     default: "true"
+    
+  users_input:
+    description: "User manually enters the input and it should not be greater than the max_threshold"
+    required: false
+    default: "0"
 
   max_threshold:
     description: "This is the max value of the fibonacci"
     required: true
     default: "180"
-  users_input:
-    description: "User manually enters the input and it should not be greater than the max_threshold"
-    required: false
-    default: "0"
 
 runs:
   using: "docker"
