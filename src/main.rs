@@ -2,10 +2,14 @@ mod extract_numbers;
 mod get_input_on_github;
 mod fibbonacci_calculator;
 use std::env;
+use std::fs::OpenOptions;
+use std::io::Write;
 use fibbonacci_calculator::fibonacci;
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
-fn main() {
-    println!("Hello, world!");
+    // println!("Hello, world!");
+    
     let args: Vec<String> = env::args().collect();
 
     let enable_fib = args.get(1).map_or(false, |arg| arg == "true");
@@ -27,5 +31,26 @@ fn main() {
         }
     }
     println!();
+    
+    let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await?;
+    println!("{:?}",files);
+    Ok(())
+
+    
+    
+    
+
 }
 
+use octocrab::models::CommentId;
+use octocrab::models::pulls::Comment;
+use reqwest::Url;
+
+ async fn run() -> octocrab::Result<Comment> {
+    let octocrab = octocrab::Octocrab::default();
+    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(21)).delete();
+    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(42)).update("new comment");
+    let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(42)).get().await;
+
+    comment
+ }
