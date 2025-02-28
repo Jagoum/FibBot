@@ -3,6 +3,8 @@ mod extract_nums;
 mod convert_json_to_string;
 mod fibbonacci_calculator;
 use std::env;
+use octocrab::models::CommentId;
+use octocrab::models::pulls::Comment;
 use extract_nums::extract_nums;
 use fibbonacci_calculator::fibonacci;
 
@@ -32,23 +34,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             print!("{} ",element);
         }
     }
-
-
-    println!();
-    let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await?;
-    let files = files.items.first().unwrap().patch.clone().unwrap();
-    println!("{}",files);
-    let nums = extract_nums(&files.as_str());
-    println!("{nums:?}");
-
-
-    
     
 Ok(())
 }
 
-use octocrab::models::CommentId;
-use octocrab::models::pulls::Comment;
 
  async fn run() -> octocrab::Result<Comment> {
     let octocrab = octocrab::Octocrab::default();
@@ -57,4 +46,25 @@ use octocrab::models::pulls::Comment;
     let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).get().await;
 
     comment
+ }
+
+
+/// This function get the content from a pull request and then parse it to extract numbers
+ async  fn get_pr() -> Vec<u128>{
+
+    let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await;
+    let files = files.unwrap().items.first().unwrap().patch.clone().unwrap();
+    println!("Pull Resquest Contents:\n{}",files);
+    let nums = extract_nums(&files.as_str());
+    println!("Collected Nums: {nums:?}");
+    nums
+
+ }
+
+ async fn post_comment(){
+    let response = octocrab::Octocrab::_post(&self, uri, body)
+    let response = response
+        .issues(owner, repo)
+        .create_comment(pr_number, &message) 
+        .await;
  }
