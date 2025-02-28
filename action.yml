@@ -4,18 +4,18 @@ description: "This action is to print hello world"
 inputs:
   enable_fib:
     description: "This will enable fibonacci"
-    required: true
+    required: false
     default: "true"
 
   max_threshold:
     description: "This is the max value of the fibonacci"
-    required: true
+    required: false
     default: "180"
 
   users:
     description: "The user should parse his own value but it should not be greater than the max_threshold"
     required: true
-    default: "0"
+
   runs:
     using: "docker"
     image: "Dockerfile"
