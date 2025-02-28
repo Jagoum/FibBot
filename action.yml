@@ -12,7 +12,7 @@ inputs:
     required: true
     default: "180"
 
-  users_input:
+  users:
     description: "The user should parse his own value but it should not be greater than the max_threshold"
     required: true
     default: "0"
@@ -22,4 +22,4 @@ inputs:
     args:
       - ${{ inputs.enable_fib }}
       - ${{ inputs.max_threshold }}
-      - ${{ inputs.users_input }}
+      - ${{ inputs.users }}
