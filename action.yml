@@ -12,15 +12,9 @@ inputs:
     required: false
     default: "180"
 
-  users:
-    description: "The user should parse his own value but it should not be greater than the max_threshold"
-    required: true
-
   runs:
     using: "docker"
     image: "Dockerfile"
-    env:
-      ENABLE_FIB: ${{ inputs.enable_fib }}
-      MAX_THRESHOLD: ${{ inputs.max_threshold }}
-      USERS: ${{ inputs.users }}
-    entrypoint: /usr/local/bin/fibbot
+    args:
+      - ${{ inputs.enable_fib }}
+      - ${{ inputs.max_threshold }
