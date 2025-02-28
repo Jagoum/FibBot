@@ -3,7 +3,7 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
     
     let mut fib1 = 0;
     let mut fib2 = 1;
-    let mut fibn = 0;
+    let mut fibn ;
 
     if num > 1 {
         for _ in 2..=num{
