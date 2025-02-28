@@ -15,6 +15,6 @@ inputs:
   runs:
     using: "docker"
     image: "Dockerfile"
-    env:
-      ENABLE_FIB: ${{ enable_fib }}
-      MAX_THRESHOLD: ${{ max_threshold }}
+    args:
+      - ${{ inputs.enable_fib }}
+      - ${{ inputs.max_threshold }}
