@@ -21,4 +21,5 @@ runs:
   image: "Dockerfile"
   args:
     - ${{ inputs.enable_fib }}
+    - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}
