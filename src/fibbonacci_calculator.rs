@@ -35,8 +35,9 @@ fn works_correctly(){
     assert_eq!(*fib.get(0).unwrap(), 0);
     assert_eq!(*fib.get(1).unwrap(),1);
 }
+#[test]
 fn it_might_work(){
     let might_work = fibonacci(0);
     assert_eq!(*might_work.get(0).unwrap(),0);
-   unsafe { assert_eq!(*might_work.get(9).unwrap(),0)};
+ assert_eq!(*might_work.get(9).unwrap(),0);
 }
