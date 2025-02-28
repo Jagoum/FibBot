@@ -61,10 +61,10 @@ Ok(())
 
  }
 
- async fn post_comment(){
-    let response = octocrab::Octocrab::_post(&self, uri, body)
-    let response = response
-        .issues(owner, repo)
-        .create_comment(pr_number, &message) 
-        .await;
- }
+//  async fn post_comment(){
+//     let response = octocrab::Octocrab::_post(&self, uri, body)
+//     let response = response
+//         .issues(owner, repo)
+//         .create_comment(pr_number, &message) 
+//         .await;
+//  }
