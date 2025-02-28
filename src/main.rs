@@ -1,5 +1,4 @@
 mod extract_nums;
-mod convert_json_to_string;
 mod fibbonacci_calculator;
 use std::env;
 use reqwest::Client;
@@ -51,7 +50,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 // Here am passing the string as parameter into this funcition that posts to github 
 //This string contains the results of our fibo sequence of the numbers we collected
-    let posted_content = post_comment(string.as_str());
+    let _posted_content = post_comment(string.as_str());
     println!("Content to be Posted\n{}",string);
     
 Ok(())
