@@ -12,7 +12,7 @@ jobs:
             # This will Check my repository to see if it is running
             -   name: Checkout Repository
                 uses: actions/checkout@v4
-                
+            # This is to prevent your workflow from building from scratch but to build only file that have being updated
             -   name: Cached Cargo registry and build
                 uses: actions/cache@v4
                 with:

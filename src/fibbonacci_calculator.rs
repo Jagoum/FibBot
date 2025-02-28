@@ -1,4 +1,4 @@
-pub fn fibonacci(num: i128) -> Vec<u128>{
+pub fn fibonacci(num: u128) -> Vec<u128>{
     let mut elements:Vec<u128> = vec![0,1];
     
     let mut fib1 = 0;

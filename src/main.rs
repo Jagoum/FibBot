@@ -2,6 +2,7 @@ mod extract_nums;
 mod convert_json_to_string;
 mod fibbonacci_calculator;
 use std::env;
+use reqwest::Client;
 use octocrab::models::CommentId;
 use octocrab::models::pulls::Comment;
 use extract_nums::extract_nums;
@@ -33,6 +34,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             print!("{} ",element);
         }
     }
+    let nums = get_pr();
+    for i in nums.await.iter(){
+        fibonacci(*i);
+    }
     
 Ok(())
 }
@@ -49,7 +54,7 @@ Ok(())
 
 
 /// This function get the content from a pull request and then parse it to extract numbers
- async  fn get_pr() -> Vec<u128>{
+ async fn get_pr() -> Vec<u128>{
 
     let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await;
     let files = files.unwrap().items.first().unwrap().patch.clone().unwrap();
@@ -57,13 +62,38 @@ Ok(())
     let nums = extract_nums(&files.as_str());
     println!("Collected Nums: {nums:?}");
     nums
-
  }
 
-//  async fn post_comment(){
-//     let response = octocrab::Octocrab::_post(&self, uri, body)
-//     let response = response
-//         .issues(owner, repo)
-//         .create_comment(pr_number, &message) 
-//         .await;
-//  }
+ 
+ pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
+     let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
+     let pr_number = env::var("PR_NUMBER")
+         .expect("PR_NUMBER not set")
+         .parse::<u32>()
+         .expect("Invalid PR_NUMBER");
+ 
+     let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
+ 
+     let url = format!(
+         "https://api.github.com/repos/{}/issues/{}/comments",
+         repo, pr_number
+     );
+ 
+     let client = Client::new();
+     let response = client
+         .post(&url)
+         .header("Authorization", format!("Bearer {}", github_token))
+         .header("User-Agent", "FibBot")
+         .header("Accept", "application/vnd.github.full+json")
+         .json(&serde_json::json!({ "body": pr_content }))
+         .send()
+         .await?;
+ 
+     if response.status().is_success() {
+         println!("✅ Comment posted successfully.");
+     } else {
+         eprintln!("❌ Failed to post comment: {:?}", response.text().await?);
+     }
+ 
+     Ok(())
+ }
