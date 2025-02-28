@@ -1,8 +1,11 @@
 mod extract_nums;
+mod get_pull_request;
 mod fibbonacci_calculator;
 use std::env;
+use get_pull_request::get_pr;
 use reqwest::Client;
 use extract_nums::extract_nums;
+
 use fibbonacci_calculator::fibonacci;
 
 
@@ -36,17 +39,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Here am converting the output of the fibonacci of those multiple numbers into a string 
     // This is so that i can parse it to my post comment which takes an &str
     // So here i use nested for loops which is not really the best
-    let string: String = {
-        let mut  str = String::from("Result Of Fibonacci Sequence pr_content: ");
-        for i in nums.await.iter(){
-        let fib = fibonacci(*i);
-        for i in fib {
-
-            str.push((i as u8) as char );
-        }
-    };
-    str
-};
+    let mut string: String = String::from("##Pull Content: ");
+    let response = get_pr().await;
+   
+    for &num in &response{
+        let fib = fibonacci(num);
+        string.push_str(format!("- Fibonacci({}) = {:?}\n", num, fib).as_str());
+    }
+    
 
 // Here am passing the string as parameter into this funcition that posts to github 
 //This string contains the results of our fibo sequence of the numbers we collected
@@ -59,15 +59,7 @@ Ok(())
 
 
 /// This function get the content from a pull request and then parse it to extract numbers
-async fn get_pr() -> Vec<u128>{
 
-    let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await;
-    let files = files.unwrap().items.first().unwrap().patch.clone().unwrap();
-    println!("Pull Resquest Contents:\n{}",files);
-    let nums = extract_nums(&files.as_str());
-    println!("Collected Nums: {nums:?}");
-    nums
-}
 
 
  
