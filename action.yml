@@ -16,6 +16,5 @@ inputs:
     using: "docker"
     image: "Dockerfile"
     env:
-      ENABLE_FIB: ${{ inputs.enable_fib }}
-      MAX_THRESHOLD: ${{ inputs.max_threshold }}
-  entrypoint: /usr/local/bin/fibbot
+      ENABLE_FIB: ${{ enable_fib }}
+      MAX_THRESHOLD: ${{ max_threshold }}
