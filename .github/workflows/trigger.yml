@@ -52,8 +52,8 @@ jobs:
                 uses: ./
                 with:
                     enable_fib: "true"
-                    max_threshold: "150"
                     users_input: "28"
+                    max_threshold: "150"
                    
                     
             
