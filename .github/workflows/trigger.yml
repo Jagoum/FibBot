@@ -4,9 +4,7 @@ on:
         branches:
             - main
             - '**'
-permissions:
-    pull-requests: write
-    contents: read
+    pull_request:
 
 jobs:
     run-hello-world:
