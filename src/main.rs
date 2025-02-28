@@ -100,7 +100,6 @@ async fn get_pr() -> Vec<u128>{
      } else {
          eprintln!("❌ Failed to post comment: {:?}", response.text().await?);
      }
- 
      Ok(())
     }
 

@@ -4,10 +4,17 @@ on:
         branches:
             - main
             - '**'
+permissions:
+    pull-requests: write
+    contents: read
 
 jobs:
     run-hello-world:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
+            repository-projects: write
         steps:
             # This will Check my repository to see if it is running
             -   name: Checkout Repository
@@ -54,6 +61,7 @@ jobs:
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
                    
                     
             
