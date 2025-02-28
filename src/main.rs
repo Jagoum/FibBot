@@ -1,10 +1,13 @@
 mod extract_numbers;
 mod get_input_on_github;
+mod extract_nums;
+mod convert_json_to_string;
 mod fibbonacci_calculator;
 use std::env;
-use std::fs::OpenOptions;
-use std::io::Write;
+use extract_nums::extract_nums;
 use fibbonacci_calculator::fibonacci;
+
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
@@ -30,27 +33,29 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             print!("{} ",element);
         }
     }
+
+
     println!();
-    
     let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await?;
-    println!("{:?}",files);
-    Ok(())
+    let files = files.items.first().unwrap().patch.clone().unwrap();
+    println!("{}",files);
+    let nums = extract_nums(&files.as_str());
+    println!("{nums:?}");
+
 
     
     
-    
-
+Ok(())
 }
 
 use octocrab::models::CommentId;
 use octocrab::models::pulls::Comment;
-use reqwest::Url;
 
  async fn run() -> octocrab::Result<Comment> {
     let octocrab = octocrab::Octocrab::default();
-    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(21)).delete();
-    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(42)).update("new comment");
-    let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(42)).get().await;
+    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).delete();
+    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).update("Added A new comment Locally");
+    let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).get().await;
 
     comment
  }
