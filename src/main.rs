@@ -3,8 +3,6 @@ mod convert_json_to_string;
 mod fibbonacci_calculator;
 use std::env;
 use reqwest::Client;
-use octocrab::models::CommentId;
-use octocrab::models::pulls::Comment;
 use extract_nums::extract_nums;
 use fibbonacci_calculator::fibonacci;
 
@@ -34,27 +32,35 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             print!("{} ",element);
         }
     }
+
     let nums = get_pr();
-    for i in nums.await.iter(){
-        fibonacci(*i);
-    }
+    // Here am converting the output of the fibonacci of those multiple numbers into a string 
+    // This is so that i can parse it to my post comment which takes an &str
+    // So here i use nested for loops which is not really the best
+    let string: String = {
+        let mut  str = String::from("Result Of Fibonacci Sequence pr_content: ");
+        for i in nums.await.iter(){
+        let fib = fibonacci(*i);
+        for i in fib {
+
+            str.push((i as u8) as char );
+        }
+    };
+    str
+};
+
+// Here am passing the string as parameter into this funcition that posts to github 
+//This string contains the results of our fibo sequence of the numbers we collected
+    let posted_content = post_comment(string.as_str());
+    println!("Content to be Posted\n{}",string);
     
 Ok(())
 }
 
 
- async fn run() -> octocrab::Result<Comment> {
-    let octocrab = octocrab::Octocrab::default();
-    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).delete();
-    let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).update("Added A new comment Locally");
-    let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).get().await;
-
-    comment
- }
-
 
 /// This function get the content from a pull request and then parse it to extract numbers
- async fn get_pr() -> Vec<u128>{
+async fn get_pr() -> Vec<u128>{
 
     let files = octocrab::instance().pulls("Jagoum", "FibBot").list_files(1).await;
     let files = files.unwrap().items.first().unwrap().patch.clone().unwrap();
@@ -62,7 +68,8 @@ Ok(())
     let nums = extract_nums(&files.as_str());
     println!("Collected Nums: {nums:?}");
     nums
- }
+}
+
 
  
  pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
@@ -71,16 +78,16 @@ Ok(())
          .expect("PR_NUMBER not set")
          .parse::<u32>()
          .expect("Invalid PR_NUMBER");
- 
+        
      let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
- 
+     
      let url = format!(
          "https://api.github.com/repos/{}/issues/{}/comments",
          repo, pr_number
-     );
- 
-     let client = Client::new();
-     let response = client
+        );
+        
+        let client = Client::new();
+        let response = client
          .post(&url)
          .header("Authorization", format!("Bearer {}", github_token))
          .header("User-Agent", "FibBot")
@@ -96,4 +103,15 @@ Ok(())
      }
  
      Ok(())
- }
+    }
+
+
+
+    //  async fn run() -> octocrab::Result<Comment> {
+    //     let octocrab = octocrab::Octocrab::default();
+    //     let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).delete();
+    //     let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).update("Added A new comment Locally");
+    //     let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).get().await;
+    
+    //     comment
+    //  }
