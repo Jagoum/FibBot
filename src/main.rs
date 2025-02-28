@@ -1,4 +1,5 @@
 mod extract_numbers;
+mod get_input_on_github;
 mod fibbonacci_calculator;
 use std::env;
 use fibbonacci_calculator::fibonacci;

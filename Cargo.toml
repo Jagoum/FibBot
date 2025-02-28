@@ -5,4 +5,7 @@ edition = "2021"
 
 [dependencies]
 gh-workflow = "0.5.10"
+octocrab = "0.43.0"
 regex = "1.11.1"
+reqwest = "0.12.12"
+tokio = "1.43.0"
