@@ -12,9 +12,9 @@ inputs:
     required: false
     default: "180"
 
-  runs:
-    using: "docker"
-    image: "Dockerfile"
-    args:
-      - ${{ inputs.enable_fib }}
-      - ${{ inputs.max_threshold }}
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.enable_fib }}
+    - ${{ inputs.max_threshold }}
