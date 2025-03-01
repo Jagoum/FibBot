@@ -2,7 +2,7 @@ mod extract_nums;
 mod get_pull_request;
 mod push_comment;
 mod fibbonacci_calculator;
-use std::{env, num};
+use std::env;
 use get_pull_request::get_pr;
 use extract_nums::extract_nums;
 

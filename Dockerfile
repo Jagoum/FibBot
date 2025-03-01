@@ -1,11 +1,15 @@
-FROM rust:latest
+FROM rust:latest AS builder
 
 WORKDIR /app
-
-# Install and set Rust version to 1.81.0
 
 COPY . .
 
 RUN cargo build --release
 
-ENTRYPOINT ["./target/release/fibbot"]
+FROM debian:bookworm-slim
+
+WORKDIR /app
+
+COPY --from=builder /target/release/fibbot /usr/local/bin/fibbot
+
+ENTRYPOINT [ "/usr/local/bin/fibbot" ]
