@@ -2,6 +2,10 @@ name: Print hello world
 description: "This action is to print hello world"
 
 inputs:
+  pr_num:
+    description: "This is to get the current pull page number"
+    required: true
+    
   enable_fib:
     description: "This will enable fibonacci"
     required: false

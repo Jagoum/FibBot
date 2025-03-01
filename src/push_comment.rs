@@ -1,5 +1,7 @@
 use std::env;
 
+use reqwest::Client;
+
 /// This function get the content from a pull request and then parse it to extract numbers
 /// This function posts a comment to github
 pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {

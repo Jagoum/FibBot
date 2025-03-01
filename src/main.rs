@@ -4,10 +4,10 @@ mod push_comment;
 mod fibbonacci_calculator;
 use std::env;
 use get_pull_request::get_pr;
-use reqwest::Client;
 use extract_nums::extract_nums;
 
 use fibbonacci_calculator::fibonacci;
+use push_comment::post_comment;
 
 
 #[tokio::main]

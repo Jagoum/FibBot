@@ -56,6 +56,7 @@ jobs:
             -   name: Run with 150 and enable status true
                 uses: ./
                 with:
+                    pr_num: ${{ github.event.pull_request.number }}
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
