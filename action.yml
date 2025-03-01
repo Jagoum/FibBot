@@ -9,7 +9,7 @@ inputs:
     
   enable_fib:
     description: "This will enable fibonacci"
-    required: false
+    required: true
     default: "true"
     
   users_input:
