@@ -33,9 +33,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("The users input is : {users_input}");
 
 
-    if enable_fib && users_input <= max_threshold {
+    if enable_fib {
         println!("Printing fibonaci Series up to {users_input}th index");
-        for (_, element) in fibonacci(users_input.try_into().unwrap()).iter().enumerate(){
+        for (_, element) in fibonacci(max_threshold.try_into().unwrap()).iter().enumerate(){
             print!("{} ",element);
         }
         
