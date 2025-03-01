@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // println!("Hello, world!");
     
     let args: Vec<String> = env::args().collect();
-    let pr_number = args.get(4).and_then(|new| new.parse().ok()).unwrap_or(1);
+    let pr_number = args.get(4).and_then(|new| new.parse().ok()).unwrap_or(3);
 
     let enable_fib = args.get(1).map_or(false, |arg| arg == "true");
     let max_threshold: u128 = args.get(3).and_then(|arg| arg.parse().ok()).unwrap_or(187);
@@ -38,27 +38,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         for (_, element) in fibonacci(users_input.try_into().unwrap()).iter().enumerate(){
             print!("{} ",element);
         }
+        
+        println!();
+            // let nums = get_pr(pr_number);
+            // Here am converting the output of the fibonacci of those multiple numbers into a string 
+            // This is so that i can parse it to my post comment which takes an &str
+            // So here i use nested for loops which is not really the best
+            let mut string: String = String::from("##Pull Content: ");
+            let response = get_pr(pr_number).await;
+           
+            for &num in &response{
+                let fib = fibonacci(num);
+                string.push_str(format!("- Fibonacci({}) = {:?}\n", num, fib).as_str());
+            }
+            
+        
+        // Here am passing the string as parameter into this funcition that posts to github 
+        //This string contains the results of our fibo sequence of the numbers we collected
+            let posted_content = post_comment(pr_number.try_into().unwrap(),string.as_str());
+        
+        
+            println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     }
-
-    // let nums = get_pr(pr_number);
-    // Here am converting the output of the fibonacci of those multiple numbers into a string 
-    // This is so that i can parse it to my post comment which takes an &str
-    // So here i use nested for loops which is not really the best
-    let mut string: String = String::from("##Pull Content: ");
-    let response = get_pr(pr_number).await;
-   
-    for &num in &response{
-        let fib = fibonacci(num);
-        string.push_str(format!("- Fibonacci({}) = {:?}\n", num, fib).as_str());
-    }
-    
-
-// Here am passing the string as parameter into this funcition that posts to github 
-//This string contains the results of our fibo sequence of the numbers we collected
-    let posted_content = post_comment(pr_number.try_into().unwrap(),string.as_str());
-
-
-    println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     
 Ok(())
 }

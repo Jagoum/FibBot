@@ -5,6 +5,7 @@ inputs:
   pr_num:
     description: "This is to get the current pull page number"
     required: true
+    default: "1"
     
   enable_fib:
     description: "This will enable fibonacci"
