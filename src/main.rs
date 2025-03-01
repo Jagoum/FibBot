@@ -34,11 +34,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
     if enable_fib {
-        println!("Printing fibonaci Series up to {users_input}th index");
-        for (_, element) in fibonacci(max_threshold.try_into().unwrap()).iter().enumerate(){
-            print!("{} ",element);
-        }
-        
+        // println!("Testing \nPrinting fibonaci Series up to {users_input}th index");
+        // for (_, element) in fibonacci(max_threshold).iter().enumerate(){
+        //     print!("{} ",element);
+        // }
         println!();
             // let nums = get_pr(pr_number);
             // Here am converting the output of the fibonacci of those multiple numbers into a string 
@@ -60,6 +59,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         
             println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     }
+        
     
 Ok(())
 }
