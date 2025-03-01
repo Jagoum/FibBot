@@ -1,6 +1,6 @@
 use std::env;
 
-use reqwest::Client;
+use octocrab::Octocrab;
 
 /// This function get the content from a pull request and then parse it to extract numbers
 /// This function posts a comment to github
@@ -13,25 +13,18 @@ pub async fn post_comment(pr_content: &str) -> Result<(), reqwest::Error> {
        
     let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
     
-    let url = format!(
+    let _url = format!(
         "https://api.github.com/repos/{}/issues/{}/comments",
         repo, pr_number
        );
        
-       let client = Client::new();
-       let response = client
-        .post(&url)
-        .header("Authorization", format!("Bearer {}", github_token))
-        .header("User-Agent", "FibBot")
-        .header("Accept", "application/vnd.github.full+json")
-        .json(&serde_json::json!({ "body": pr_content }))
-        .send()
-        .await?;
+       let client =  Octocrab::builder().personal_token(github_token).build().unwrap();
+       let response = client.issues("Jagoum", "FibBot").create_comment(pr_number.into(), &pr_content).await;
 
-    if response.status().is_success() {
+    if  response.is_ok() {
         println!("✅ Comment posted successfully.");
     } else {
-        eprintln!("❌ Failed to post comment: {:?}", response.text().await?);
+        eprintln!("❌ Failed to post comment {:?}",response.unwrap());
     }
     Ok(())
    }

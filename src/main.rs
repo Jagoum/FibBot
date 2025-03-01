@@ -14,7 +14,7 @@ use push_comment::post_comment;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
-    let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
+    // let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
     let pr_number = env::var("PR_NUMBER")
         .expect("PR_NUMBER not set")
         .parse::<u32>()
@@ -43,7 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    let nums = get_pr(pr_number);
+    // let nums = get_pr(pr_number);
     // Here am converting the output of the fibonacci of those multiple numbers into a string 
     // This is so that i can parse it to my post comment which takes an &str
     // So here i use nested for loops which is not really the best
@@ -58,8 +58,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 // Here am passing the string as parameter into this funcition that posts to github 
 //This string contains the results of our fibo sequence of the numbers we collected
-    let _posted_content = post_comment(string.as_str());
-    println!("Content to be Posted\n{}",string);
+    let posted_content = post_comment(string.as_str());
+
+
+    println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     
 Ok(())
 }
