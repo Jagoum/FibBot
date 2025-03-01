@@ -20,7 +20,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     let args: Vec<String> = env::args().collect();
 
-    let github_token = args.get(1).and_then(|token| Some(token.as_str())).unwrap();
+    let github_token = args.get(1).and_then(|token| Some(token.as_str())).unwrap_or("default");
     let enable_fib = args.get(2).map_or(true, |arg| arg == "true");
     let users_input: u128 = args.get(3).and_then(|args| args.parse().ok()).unwrap_or(0);
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);

@@ -5,7 +5,7 @@ inputs:
   github_token:
     description: "Adding my token"
     required: true
-    default: ""
+    default: "empty"
 
   enable_fib:
     description: "This will enable fibonacci"
@@ -32,7 +32,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.gitbu_token }}
+    - ${{ inputs.github_token }}
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}

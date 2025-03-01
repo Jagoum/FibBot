@@ -20,6 +20,9 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
         println!();
         elements
     }
+    else if num == 0{
+        return vec![0];
+    }
     else if num == 1 {
         return elements;
     }
@@ -39,5 +42,5 @@ fn works_correctly(){
 fn it_might_work(){
     let might_work = fibonacci(0);
     assert_eq!(*might_work.get(0).unwrap(),0);
- assert_eq!(*might_work.get(9).unwrap(),0);
+ assert_ne!(*might_work.get(9).unwrap(),0);
 }
