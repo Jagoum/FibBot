@@ -12,6 +12,7 @@ I used some rust libaries like octocrab to get the content of a pull request
 I used regex pattern matching to extract the the numbers from the pull request that has being parsed to a string
 
 To parse the string i called some specail methods on the the content of the pull request.
+This project is very fun
 
 I Love this chanlenge
 
