@@ -7,7 +7,7 @@ use get_pull_request::get_pr;
 use extract_nums::extract_nums;
 
 use fibbonacci_calculator::fibonacci;
-use push_comment::post_comment;
+use push_comment::post_github_comment;
 
 
 #[tokio::main]
@@ -55,7 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 
             }
             
-            let _posted_content = post_comment(pr_number.try_into().unwrap(),string.as_str(),github_token);
+            let _posted_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string);
     
         // Here am passing the string as parameter into this funcition that posts to github 
         //This string contains the results of our fibo sequence of the numbers we collected
