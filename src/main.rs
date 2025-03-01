@@ -14,17 +14,19 @@ use push_comment::post_comment;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
-    let args: Vec<String> = env::args().collect();
-
-    // let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
-    let pr_number = args.get(1).and_then( |num| num.parse().ok()).unwrap_or(1);
-  
+    let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
+    let pr_number = env::var("PR_NUMBER")
+        .expect("PR_NUMBER not set")
+        .parse::<u32>()
+        .expect("Invalid PR_NUMBER");
 
     // println!("Hello, world!");
     
-    let enable_fib = args.get(2).map_or(false, |arg| arg == "true");
+    let args: Vec<String> = env::args().collect();
+
+    let enable_fib = args.get(1).map_or(false, |arg| arg == "true");
     let max_threshold: u128 = args.get(3).and_then(|arg| arg.parse().ok()).unwrap_or(100);
-    let users_input: u128 = args.get(4).and_then(|args| args.parse().ok()).unwrap_or(0);
+    let users_input: u128 = args.get(2).and_then(|args| args.parse().ok()).unwrap_or(0);
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
 
     // let max_threshold = max_threshold[0] as u128;
@@ -41,7 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    
+    let nums = get_pr(pr_number);
     // Here am converting the output of the fibonacci of those multiple numbers into a string 
     // This is so that i can parse it to my post comment which takes an &str
     // So here i use nested for loops which is not really the best
