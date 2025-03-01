@@ -15,7 +15,7 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
 
         }
         for i in elements.clone(){
-            print!("{}, ",i);
+            print!("{} ",i);
         }
         println!();
         elements
@@ -40,7 +40,7 @@ fn works_correctly(){
 }
 #[test]
 fn it_might_work(){
-    let might_work = fibonacci(0);
+    let might_work = fibonacci(1);
     assert_eq!(*might_work.get(0).unwrap(),0);
- assert_ne!(*might_work.get(9).unwrap(),0);
+ assert_eq!(*might_work.get(1).unwrap(),1);
 }

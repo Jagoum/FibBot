@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let enable_fib = args.get(2).map_or(true, |arg| arg == "true");
     let users_input: u128 = args.get(3).and_then(|args| args.parse().ok()).unwrap_or(0);
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);
-    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(1);
+    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(2);
     
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
     // let max_threshold = max_threshold[0] as u128;
@@ -46,19 +46,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mut string: String = String::from("##Pull Content: ");
             let response = get_pr(pr_number).await;
            
+            println!("Content to be Posted:");
+
             for &num in &response{
-                if num <= max_threshold { 
+                
                 let fib = fibonacci(num);
                 string.push_str(format!("- Fibonacci({}) = {:?}\n", num, fib).as_str());
-                }
+                
             }
-                    
+            
+            let _posted_content = post_comment(pr_number.try_into().unwrap(),string.as_str(),github_token);
+    
         // Here am passing the string as parameter into this funcition that posts to github 
         //This string contains the results of our fibo sequence of the numbers we collected
             
-            let posted_content = post_comment(pr_number.try_into().unwrap(),string.as_str(),github_token);
-
-            println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     }
 
 Ok(())

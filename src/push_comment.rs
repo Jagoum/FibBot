@@ -4,9 +4,9 @@ use octocrab::Octocrab;
 /// This function posts a comment to github
 pub async fn post_comment(
     pr_number: u32,
-    pr_content: &str,
+    pr_content:  &str,
     github_token: &str,
-) -> Result<(), reqwest::Error> {
+) -> Result<String, reqwest::Error> {
     // let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
     // let pr_number = env::var("PR_NUMBER")
     //     .expect("PR_NUMBER not set")
@@ -26,7 +26,7 @@ pub async fn post_comment(
         .unwrap();
     let response = client
         .issues("Jagoum", "FibBot")
-        .create_comment(pr_number.into(), &pr_content)
+        .create_comment(pr_number.into(), pr_content)
         .await;
 
     if response.is_ok() {
@@ -35,5 +35,5 @@ pub async fn post_comment(
         // eprintln!("❌ Failed to post comment {:?}",response.unwrap());
         println!("❌ Failed to post a comment")
     }
-    Ok(())
+    Ok(pr_content.into())
 }
