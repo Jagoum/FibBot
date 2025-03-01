@@ -39,7 +39,7 @@ jobs:
             -   name: Run My action with these other arguments [_,true]
                 uses: ./
                 with:
-                    pr_num: ${{ github.event.pull_request.number }}
+                    pr_num: "1"
                     enable_fib: "true"
                     users_input: "25"
                     max_threshold: "158"
@@ -48,7 +48,7 @@ jobs:
             -   name: Run with 150 and enable status true
                 uses: ./
                 with:
-                    pr_num: "1"
+                    pr_num: ${{ github.event.pull_request.number }}
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
