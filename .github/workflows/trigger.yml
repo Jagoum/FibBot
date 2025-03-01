@@ -36,18 +36,10 @@ jobs:
                 with:
                     runs: "composite"
                     
-                    #This will be used to run my action with the precised values
-            -   name: Run my action with arguments [20, false]
-                uses: ./
-                with:
-                    enable_fib: "false"
-                    users_input: "10"
-                    max_threshold: "20"
-                    
-
             -   name: Run My action with these other arguments [_,true]
                 uses: ./
                 with:
+                    pr_num: ${{ github.event.pull_request.number }}
                     enable_fib: "true"
                     users_input: "25"
                     max_threshold: "158"
