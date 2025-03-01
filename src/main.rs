@@ -2,7 +2,7 @@ mod extract_nums;
 mod get_pull_request;
 mod push_comment;
 mod fibbonacci_calculator;
-use std::env;
+use std::{env, num};
 use get_pull_request::get_pr;
 use extract_nums::extract_nums;
 
@@ -13,13 +13,18 @@ use push_comment::post_comment;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
-    // println!("Hello, world!");
-    
+
     let args: Vec<String> = env::args().collect();
 
-    let enable_fib = args.get(1).map_or(false, |arg| arg == "true");
+    // let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
+    let pr_number = args.get(1).and_then( |num| num.parse().ok()).unwrap_or(1);
+  
+
+    // println!("Hello, world!");
+    
+    let enable_fib = args.get(2).map_or(false, |arg| arg == "true");
     let max_threshold: u128 = args.get(3).and_then(|arg| arg.parse().ok()).unwrap_or(100);
-    let users_input: u128 = args.get(2).and_then(|args| args.parse().ok()).unwrap_or(0);
+    let users_input: u128 = args.get(4).and_then(|args| args.parse().ok()).unwrap_or(0);
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
 
     // let max_threshold = max_threshold[0] as u128;
@@ -36,12 +41,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    let nums = get_pr();
+    
     // Here am converting the output of the fibonacci of those multiple numbers into a string 
     // This is so that i can parse it to my post comment which takes an &str
     // So here i use nested for loops which is not really the best
     let mut string: String = String::from("##Pull Content: ");
-    let response = get_pr().await;
+    let response = get_pr(pr_number).await;
    
     for &num in &response{
         let fib = fibonacci(num);
@@ -63,11 +68,3 @@ Ok(())
 
 
 
-    //  async fn run() -> octocrab::Result<Comment> {
-    //     let octocrab = octocrab::Octocrab::default();
-    //     let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).delete();
-    //     let _ = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).update("Added A new comment Locally");
-    //     let comment = octocrab.pulls("Jagoum", "fibbot").comment(CommentId(1)).get().await;
-    
-    //     comment
-    //  }
