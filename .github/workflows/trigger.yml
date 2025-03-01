@@ -5,6 +5,10 @@ on:
             - main
             - '**'
     pull_request_target:
+        types: [opened, edited]
+        branches:
+            - 'main'
+            - '**'
 
 permissions:
     pull-requests: write
