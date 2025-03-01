@@ -31,6 +31,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("The maximum threshold Value is : {}",max_threshold);
     println!("The users input is : {users_input}");
 
+    // user input is almost useless just for fun
 
     if enable_fib {
         // println!("Testing \nPrinting fibonaci Series up to {users_input}th index");
@@ -59,7 +60,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             println!("Content to be Posted\n{:?}",posted_content.await.unwrap());
     }
-        
-    
+
 Ok(())
 }

@@ -1,5 +1,3 @@
-use std::env;
-
 use octocrab::Octocrab;
 
 /// This function get the content from a pull request and then parse it to extract numbers
