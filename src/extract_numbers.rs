@@ -1,6 +1,7 @@
 
 use crate::fibbonacci_calculator::fibonacci;
-
+///- This function uses string parsing methods to get the numbers
+/// > This function is limited in that it can only get numbers that are not attarched to any thing like hanging numbers in a string
 pub  fn extract_nums(string:&str) -> Vec<u128>{
 
     let string: Vec<String> = string.split_whitespace().map(String::from).collect();
