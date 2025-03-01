@@ -52,7 +52,11 @@ jobs:
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
-                    github_token: ${{ secrets.GITHUB_TOKEN }}
+                    
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    
+
                    
                     
             

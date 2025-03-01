@@ -32,4 +32,4 @@ runs:
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}
-    - ${{ inputs.github_token }}
+#    - ${{ inputs.github_token }}
