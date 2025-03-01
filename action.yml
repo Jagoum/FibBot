@@ -21,11 +21,7 @@ inputs:
     description: "This is the max value of the fibonacci"
     required: true
     default: "180"
-    
-  github_token:
-    description: "GitHub token to interact with GitHub API"
-    required: true
-
+    # This one will cause my docker file to be exercuted
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -34,4 +30,3 @@ runs:
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}
-    - ${{ inputs.github_token }}
