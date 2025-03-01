@@ -5,7 +5,7 @@ This project is to learn how to  use github apis and to familiarise myself with 
 
 This project scans  a pull request for numbers and post the result as a comment on github . 
 
-The numbers are parse into a fibbonacci calculator and the post the result of the fibbonacci calculator to this gh repo as a comment
+The numbers are parse into a fibbonacci calculator and then post the result of the fibbonacci calculator to this gh repo as a comment
 
 I used some rust libaries like octocrab to get the content of a pull request
 
