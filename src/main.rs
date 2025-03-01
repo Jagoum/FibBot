@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // println!("Hello, world!");
     
     let args: Vec<String> = env::args().collect();
-    let pr_number = args.get(4).and_then(|new| new.parse().ok()).unwrap_or(3);
+    let pr_number = args.get(4).and_then(|new| new.parse().ok()).unwrap_or(1);
 
     let enable_fib = args.get(1).map_or(false, |arg| arg == "true");
     let max_threshold: u128 = args.get(3).and_then(|arg| arg.parse().ok()).unwrap_or(187);
