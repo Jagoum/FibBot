@@ -1,8 +1,8 @@
 FROM rust:latest AS builder
 
-COPY . .
 
 WORKDIR /app
+COPY . .
 
 RUN cargo build --release
 
@@ -12,4 +12,4 @@ WORKDIR /app
 
 COPY --from=builder /target/release/fibbot /app
 
-ENTRYPOINT [ "/app/fibbot" ]
+ENTRYPOINT [ "/app/target/release/fibbot" ]
