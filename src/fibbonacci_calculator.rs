@@ -20,7 +20,7 @@ pub fn fibonacci(num: u128) -> Vec<u128>{
         println!();
         elements
     }
-    else if num == 1{
+    else if num == 1 {
         return elements;
     }
     else {

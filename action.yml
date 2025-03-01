@@ -2,7 +2,11 @@ name: Print hello world
 description: "This action is to print hello world"
 
 inputs:
-    
+  github_token:
+    description: "Adding my token"
+    required: true
+    default: ""
+
   enable_fib:
     description: "This will enable fibonacci"
     required: true
@@ -28,6 +32,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.gitbu_token }}
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}

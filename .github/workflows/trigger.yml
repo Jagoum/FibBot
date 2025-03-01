@@ -56,13 +56,13 @@ jobs:
             -   name: Run with 150 and enable status true
                 uses: ./
                 with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
                     pr_num: ${{ github.event.pull_request.number }}
                     
-                env:
-                    GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+                
                     
 
                    

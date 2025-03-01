@@ -4,14 +4,14 @@ use octocrab::Octocrab;
 
 /// This function get the content from a pull request and then parse it to extract numbers
 /// This function posts a comment to github
-pub async fn post_comment(pr_number: u32,pr_content: &str) -> Result<(), reqwest::Error> {
+pub async fn post_comment(pr_number: u32,pr_content: &str , github_token: &str) -> Result<(), reqwest::Error> {
     // let repo = env::var("GITHUB_REPOSITORY").expect("GITHUB_REPOSITORY not set");
     // let pr_number = env::var("PR_NUMBER")
     //     .expect("PR_NUMBER not set")
     //     .parse::<u32>()
     //     .expect("Invalid PR_NUMBER"); this is not necessary for now
        
-    let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
+    // let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set"); // Finally decided to use args instead of env
     
     // let _url = format!(
     //     "https://api.github.com/repos/{}/issues/{}/comments",
