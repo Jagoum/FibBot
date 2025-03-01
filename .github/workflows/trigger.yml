@@ -39,7 +39,7 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-cargo-
                         
-            -   name: Exercute Custorm Action
+            -   name: Exercute Custorm Action Created By Richmond
                 uses: ./
                 with:
                     runs: "composite"
@@ -47,6 +47,7 @@ jobs:
             -   name: Run My action with these other arguments [_,true]
                 uses: ./
                 with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
                     enable_fib: "true"
                     users_input: "25"
                     max_threshold: "158"
