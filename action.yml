@@ -29,7 +29,8 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.pr_num }}
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}
-#    - ${{ inputs.github_token }}
+    - ${{ inputs.github_token }}

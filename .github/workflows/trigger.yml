@@ -54,7 +54,6 @@ jobs:
                     max_threshold: "150"
                     
                 env:
-                    PR_NUMBER: ${{ github.event.pull_request.number }}
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     
 
