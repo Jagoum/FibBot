@@ -21,7 +21,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     let pr_number = args.get(4).and_then(|new| new.parse().ok()).unwrap_or(1);
 
-    let enable_fib = args.get(1).map_or(true, |arg| arg == "false");
+    let enable_fib = args.get(1).map_or(true, |arg| arg == "true");
     let max_threshold: u128 = args.get(3).and_then(|arg| arg.parse().ok()).unwrap_or(187);
     let users_input: u128 = args.get(2).and_then(|args| args.parse().ok()).unwrap_or(0);
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");

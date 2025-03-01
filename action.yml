@@ -2,10 +2,6 @@ name: Print hello world
 description: "This action is to print hello world"
 
 inputs:
-  pr_num:
-    description: "This is to get the current pull page number"
-    required: true
-    default: "1"
     
   enable_fib:
     description: "This will enable fibonacci"
@@ -21,12 +17,18 @@ inputs:
     description: "This is the max value of the fibonacci"
     required: true
     default: "180"
+  
+  # This argument here will help me to get the pull request number and pass it as the 4th argument
+  pr_num:
+    description: "This is to get the current pull page number"
+    required: true
+    default: "1"
     # This one will cause my docker file to be exercuted
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.pr_num }}
     - ${{ inputs.enable_fib }}
     - ${{ inputs.users_input }}
     - ${{ inputs.max_threshold }}
+    - ${{ inputs.pr_num }}
