@@ -1,11 +1,18 @@
-///This is bet
-/// 
+
+
+pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr_number: u64, pr_content: &str) -> Result<(), Box<dyn Error>> {
 
 use reqwest::Client;
 use serde_json::json;
 use std::error::Error;
-
-pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr_number: u64, pr_content: &str) -> Result<(), Box<dyn Error>> {
+pub async fn post_github_comment(
+    github_token: &str,
+    owner: &str,
+    repo: &str,
+    pr_number: u64,
+    pr_content: &str,
+) -> Result<(), Box<dyn Error>> {
+  
     let client = Client::new();
     let url = format!(
         "https://api.github.com/repos/{}/{}/issues/{}/comments",
@@ -14,6 +21,11 @@ pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr
     
     let body = json!({ "body": pr_content });
     
+
+    println!("🚀 Sending request to: {}", url);
+
+
+
     let response = client
         .post(&url)
         .header("Authorization", format!("token {}", github_token))
@@ -21,30 +33,21 @@ pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr
         .json(&body)
         .send()
         .await?;
-    
-    if response.status().is_success() {
-        println!(" ✅ Comment posted successfully");
+  
+      let status = response.status();
+    let text = response.text().await.unwrap_or_else(|_| "Failed to read response".to_string());
+
+    println!("📡 Response Status: {}", status);
+    println!("📩 Raw Response: {}", text);
+
+    if status.is_success() {
+        println!("✅ Comment posted successfully!");
     } else {
-        println!(" ❌ Failed to post comment: {:?}", response.text().await?);
+        eprintln!("❌ Failed to post comment: {}", text);
     }
-    
+
     Ok(())
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // use octocrab::Octocrab;
 
@@ -85,3 +88,5 @@ pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr
 //     }
 //     Ok(pr_content.into())
 // }
+
+
