@@ -1,10 +1,15 @@
 name: Print Hello World
 on:
-    push:
+   
+    pull_request_target:
+        types: [opened, edited]
         branches:
-            - main
+            - 'main'
             - '**'
-    pull_request:
+
+permissions:
+    pull-requests: write
+    contents: read
 
 jobs:
     run-hello-world:
@@ -31,7 +36,7 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-cargo-
                         
-            -   name: Exercute Custorm Action
+            -   name: Exercute Custorm Action Created By Richmond
                 uses: ./
                 with:
                     runs: "composite"
@@ -39,22 +44,23 @@ jobs:
             -   name: Run My action with these other arguments [_,true]
                 uses: ./
                 with:
-                    pr_num: ${{ github.event.pull_request.number }}
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
                     enable_fib: "true"
                     users_input: "25"
                     max_threshold: "158"
+                    pr_num: ${{ github.event.pull_request.number }}
                    
 
             -   name: Run with 150 and enable status true
                 uses: ./
                 with:
-                    pr_num: ${{ github.event.pull_request.number }}
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
+                    pr_num: ${{ github.event.pull_request.number }}
                     
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                
                     
 
                    
