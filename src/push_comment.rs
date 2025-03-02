@@ -1,7 +1,6 @@
 use reqwest::Client;
-use serde_json::{json, Value};
+use serde_json::json;
 use std::error::Error;
-
 pub async fn post_github_comment(
     github_token: &str,
     owner: &str,
@@ -15,36 +14,28 @@ pub async fn post_github_comment(
         owner, repo, pr_number
     );
 
-    // Fetch existing comments to avoid duplicates
-    let existing_comments: Vec<Value> = client
-        .get(&url)
-        .header("Authorization", format!("Bearer {}", github_token))
-        .header("User-Agent", "MyGitHubBot")
-        .send()
-        .await?
-        .json()
-        .await?;
+    println!("🚀 Sending request to: {}", url);
 
-    if existing_comments.iter().any(|comment| {
-        comment["body"].as_str().map_or(false, |body| body == pr_content)
-    }) {
-        println!(" ⚠️ Comment already exists, skipping...");
-        return Ok(());
-    }
+    let body = json!({ "body": pr_content });
 
-    // Post the comment
     let response = client
         .post(&url)
-        .header("Authorization", format!("Bearer {}", github_token))
-        .header("User-Agent", "MyGitHubBot")
-        .json(&json!({ "body": pr_content }))
+        .header("Authorization", format!("token {}", github_token))
+        .header("User-Agent", "reqwest")
+        .json(&body)
         .send()
         .await?;
 
-    if response.status().is_success() {
-        println!(" ✅ Comment posted successfully");
+    let status = response.status();
+    let text = response.text().await.unwrap_or_else(|_| "Failed to read response".to_string());
+
+    println!("📡 Response Status: {}", status);
+    println!("📩 Raw Response: {}", text);
+
+    if status.is_success() {
+        println!("✅ Comment posted successfully!");
     } else {
-        eprintln!(" ❌ Failed to post comment: {:?}", response.text().await?);
+        eprintln!("❌ Failed to post comment: {}", text);
     }
 
     Ok(())

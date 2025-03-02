@@ -56,11 +56,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 
             }
             
-            match post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string).await{
-                Ok(_) => {println!("Function Exercuted successfully")},
-                Err(e) => {eprintln!("Failed to exercute function {}",e)},
-            }
-    
+            let _post_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string).await?;
         // Here am passing the string as parameter into this funcition that posts to github 
         //This string contains the results of our fibo sequence of the numbers we collected
             
