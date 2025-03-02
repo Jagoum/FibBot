@@ -16,7 +16,6 @@ This project is very fun
 
 I Love this chanlenge
 
-I Love this chanlenge
 
 ```rs
 
