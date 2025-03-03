@@ -4,9 +4,7 @@ mod get_pull_request;
 mod push_comment;
 use extract_nums::extract_nums;
 use get_pull_request::get_pr;
-use serde::de::value;
-use std::{env, process::exit};
-
+use std::env;
 use fibbonacci_calculator::fibonacci;
 use push_comment::post_github_comment;
 
