@@ -1,7 +1,4 @@
 
-
-pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr_number: u64, pr_content: &str) -> Result<(), Box<dyn Error>> {
-
 use reqwest::Client;
 use serde_json::json;
 use std::error::Error;
@@ -19,7 +16,7 @@ pub async fn post_github_comment(
         owner, repo, pr_number
     );
     
-    let body = json!({ "body": pr_content });
+    let _body = json!({ "body": pr_content });
     
 
     println!("🚀 Sending request to: {}", url);

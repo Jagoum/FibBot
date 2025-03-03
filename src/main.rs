@@ -24,27 +24,27 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let users_input: u128 = args.get(3).and_then(|args| args.parse().ok()).unwrap_or(0);
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);
 
-    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(2);
+    let owner = "Jagoum"; let repo = "FibBot";
+    // let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(1);
+    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(3);
     
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
     // let max_threshold =======
 
- 
-            let _post_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string).await?;
- 
+
+
         // Here am passing the string as parameter into this funcition that posts to github 
- 
+
         //This string contains the results of our fibo sequence of the numbers we collected
 
- 
+
             
- 
-    }
- 
+
+    
+
     
 //= max_threshold[0] as u128;
 
-    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(1);
 
     
 
@@ -78,8 +78,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 
             }
             
-
-            let _posted_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string);
+            println!("{}",string);
+            let posted_content = post_github_comment(github_token,owner,repo,pr_number,&string).await;
+            match posted_content {
+                Ok(_) => {println!("Successufully Posted Content\n")},
+                Err(err) => {eprintln!("Failed to Post Content\n{}",err)},
+            }
     
         // Here am passing the string as parameter into this funcition that posts to github 
         //This string contains the results of our fibo sequence of the numbers we collected
