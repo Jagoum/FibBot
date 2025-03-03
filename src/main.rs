@@ -23,10 +23,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let enable_fib = args.get(2).map_or(true, |arg| arg == "true");
     let users_input: u128 = args.get(3).and_then(|args| args.parse().ok()).unwrap_or(0);
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);
-    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(8);
+    // let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(8);
 
+    let pr_number = args[5].parse().unwrap();
     let owner = "Jagoum"; let repo = "FibBot";
-    // let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(1);
     
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
     // let max_threshold =======

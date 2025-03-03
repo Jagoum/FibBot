@@ -10,6 +10,9 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . .
 
+#Running test to ensure the code works as expected
+RUN cargo test --release
+
 # Build the Rust project
 RUN cargo build --release
 
