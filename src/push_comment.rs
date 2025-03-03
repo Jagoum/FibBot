@@ -23,6 +23,10 @@ pub async fn post_github_comment(
     
 
     println!("🚀 Sending request to: {}", url);
+    let body = json!({ "body": pr_content });
+// This particular method will do a post method to the gh api and the api will respond to the request
+// The url is used to precise the action repository and user that will be posting to that repository
+// Json here is just to format the content that will be posted on github or the input that it gets form the pr_conten=======
 
 
 
