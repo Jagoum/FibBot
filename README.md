@@ -13,7 +13,18 @@ I used regex pattern matching to extract the the numbers from the pull request t
 
 To parse the string i called some specail methods on the the content of the pull request.
 This project is very fun
+## How To Use
+```yaml
+  steps:
+    - name: Compute Fibbot
+      uses: @Jagoum/fibbot@v1
+      with: 
+        enable_fib: true
+        max_threshold: 105
+        pr_number: ${{ github.event.pull_request.number }}
+```
 ## TO CONTRIBUTE
+
 
 To contribute  to this project do 
 ```
