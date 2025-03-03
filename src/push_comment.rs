@@ -20,13 +20,12 @@ pub async fn post_github_comment(github_token: &str, owner: &str, repo: &str, pr
         .header("User-Agent", "reqwest")
         .json(&body)
         .send()
-        .await?;
+        .await;
     
-    if response.status().is_success() {
-        println!(" ✅ Comment posted successfully");
-    } else {
-        println!(" ❌ Failed to post comment: {:?}", response.text().await?);
-    }
+        match response {
+            Ok(_) => println!("✅ Comment posted successfully."),
+            Err(err) => eprintln!("❌ Failed to post comment: {:?}", err),
+        }
     
     Ok(())
 }
