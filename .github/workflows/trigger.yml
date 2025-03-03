@@ -6,7 +6,7 @@ on:
         branches:
             - 'main'
             - '**'
-
+# This will be triggered an pull request but not a fork
     pull_request:
         types: [opened, edited]
         branches:
