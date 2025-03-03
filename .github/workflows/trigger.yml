@@ -1,6 +1,6 @@
 name: Print Hello World
 on:
-   
+# This one is to make the workflow to be triggered on a pull request from a fork fork  
     pull_request_target:
         types: [opened, edited]
         branches:
@@ -14,7 +14,8 @@ on:
             - '**'
     push:
         branches: 'main'
-
+# This will give github action the permission to write on pull requests which is what we need to do writing a comment but before this 
+# We need to go to our github settings and and under actions we give some read and write permisions
 permissions:
     pull-requests: write
     contents: read
