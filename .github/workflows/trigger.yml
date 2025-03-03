@@ -66,8 +66,7 @@ jobs:
                     enable_fib: "true"
                     users_input: "28"
                     max_threshold: "150"
-                    pr_num: ${{ github.event.pull_request.number }}
-                    
+                    pr_num: ${{ github.event.pull_request.number }}                   
                 
                     
 
