@@ -13,6 +13,13 @@ I used regex pattern matching to extract the the numbers from the pull request t
 
 To parse the string i called some specail methods on the the content of the pull request.
 This project is very fun
+## TO CONTRIBUTE
+
+To contribute  to this project do 
+```
+git clone https://github.com/jagoum/fibbot.git 
+```
+Or you can simply fork this repo and do your changes and then create a pull request
 
 I Love this chanlenge
 
