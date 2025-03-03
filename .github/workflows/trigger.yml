@@ -12,6 +12,8 @@ on:
         branches:
             - 'main'
             - '**'
+    push:
+        branches: 'main'
 
 permissions:
     pull-requests: write
