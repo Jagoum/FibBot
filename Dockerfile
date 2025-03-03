@@ -45,4 +45,10 @@ ENTRYPOINT ["/app/target/release/fibbot"]
 
 # ENTRYPOINT [ "/app/target/release/fibbot" ]
 
+<<<<<<< HEAD
 
+=======
+COPY --from=builder /target/release/fibbot /usr/local/bin/fibbot
+
+ENTRYPOINT [ "/usr/local/bin/fibbot" ]
+>>>>>>> parent of 7ada648 (Update Dockerfile)
