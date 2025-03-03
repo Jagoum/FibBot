@@ -4,7 +4,8 @@ mod get_pull_request;
 mod push_comment;
 use extract_nums::extract_nums;
 use get_pull_request::get_pr;
-use std::env;
+use serde::de::value;
+use std::{env, process::exit};
 
 use fibbonacci_calculator::fibonacci;
 use push_comment::post_github_comment;
@@ -25,7 +26,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);
     // let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(8);
 
-    let pr_number = args[5].parse().unwrap();
+    let pr_number: u64 = match args[5].parse() {
+        Ok(raw) => {raw},
+        Err(_) => {eprint!("Invalid pull request number please ensure that the correct pull request number is placed");
+    exit(1)},
+    };
     let owner = "Jagoum"; let repo = "FibBot";
     
     // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
