@@ -9,6 +9,7 @@ use std::env;
 use fibbonacci_calculator::fibonacci;
 use push_comment::post_github_comment;
 
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
@@ -22,7 +23,29 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let enable_fib = args.get(2).map_or(true, |arg| arg == "true");
     let users_input: u128 = args.get(3).and_then(|args| args.parse().ok()).unwrap_or(0);
     let max_threshold: u128 = args.get(4).and_then(|arg| arg.parse().ok()).unwrap_or(187);
+
+    let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(2);
+    
+    // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
+    // let max_threshold =======
+
+ 
+            let _post_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string).await?;
+ 
+        // Here am passing the string as parameter into this funcition that posts to github 
+ 
+        //This string contains the results of our fibo sequence of the numbers we collected
+
+ 
+            
+ 
+    }
+ 
+    
+//= max_threshold[0] as u128;
+
     let pr_number = args.get(5).and_then(|new| new.parse().ok()).unwrap_or(1);
+
     
 
         
@@ -30,8 +53,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("The maximum threshold Value is : {}",max_threshold);
     println!("The users input is : {users_input}");
 
-    // let max_threshold = extract_nums("Hello I will 23.8 like to give you 50.0 thousand");
-    // let max_threshold = max_threshold[0] as u128;
 
     // user input is almost useless just for fun
 
@@ -57,11 +78,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 
             }
             
-            let _post_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string).await?;
+
+            let _posted_content = post_github_comment(github_token,"Jagoum","FibBot",pr_number,&string);
+    
         // Here am passing the string as parameter into this funcition that posts to github 
         //This string contains the results of our fibo sequence of the numbers we collected
             
     }
-    
+
+
 Ok(())
 }
