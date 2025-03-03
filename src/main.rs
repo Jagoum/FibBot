@@ -28,8 +28,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let pr_number: u64 = match args[5].parse() {
         Ok(raw) => {raw},
-        Err(_) => {eprint!("Invalid pull request number please ensure that the correct pull request number is placed");
-    exit(1)},
+        Err(_) => {println!("Invalid pull request number please ensure that the correct pull request number is placed. But will use the first 8 as default");
+    8},
     };
     let owner = "Jagoum"; let repo = "FibBot";
     
