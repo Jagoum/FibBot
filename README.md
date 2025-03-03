@@ -20,6 +20,8 @@ This project is very fun
       uses: @Jagoum/fibbot@v1
       with: 
         enable_fib: true
+        users_input: 12
+        # users input should be less than maximum threshold
         max_threshold: 105
         pr_number: ${{ github.event.pull_request.number }}
 ```
