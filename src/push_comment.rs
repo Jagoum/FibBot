@@ -10,22 +10,22 @@ pub async fn post_github_comment(
     pr_content: &str,
 ) -> Result<(), Box<dyn Error>> {
   
+  // THis will initialize a new client using the url precised 
     let client = Client::new();
+
+    // This url is to precise the path where the comment is supposed to be created with the pull request number
     let url = format!(
         "https://api.github.com/repos/{}/{}/issues/{}/comments",
         owner, repo, pr_number
     );
-    
-    let _body = json!({ "body": pr_content });
-    
+     
 
     println!("🚀 Sending request to: {}", url);
+
     let body = json!({ "body": pr_content });
 // This particular method will do a post method to the gh api and the api will respond to the request
 // The url is used to precise the action repository and user that will be posting to that repository
 // Json here is just to format the content that will be posted on github or the input that it gets form the pr_conten=======
-
-
 
     let response = client
         .post(&url)
@@ -34,7 +34,7 @@ pub async fn post_github_comment(
         .json(&body)
         .send()
         .await;
-    
+    // This will check the status of the reuslt wether it is an error or a
         match response {
             Ok(_) => println!("✅ Comment posted successfully."),
             Err(err) => eprintln!("❌ Failed to post comment: {:?}", err),
